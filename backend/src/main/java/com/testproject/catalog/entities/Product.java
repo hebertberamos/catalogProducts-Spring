@@ -125,5 +125,7 @@ public class Product implements Serializable{
 		return Objects.equals(id, other.id) && Objects.equals(name, other.name);
 	}
 	
-	
+	public void addCategoryToList(Category category) {
+		categories.add(category);
+	}
 }

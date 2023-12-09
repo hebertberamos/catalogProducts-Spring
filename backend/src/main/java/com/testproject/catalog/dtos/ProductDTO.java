@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.testproject.catalog.entities.Category;
 import com.testproject.catalog.entities.Product;
@@ -43,9 +44,61 @@ public class ProductDTO implements Serializable{
 	}
 	
 	//Para instanciar um ProductDTO passando também as categorias que ele tem.
-	public ProductDTO(Product entity, List<Category> categories) {
+	public ProductDTO(Product entity, Set<Category> categories) {
 		this(entity);
 		//adicionando as entidades que foram passadas pela listo do parâmetro e adicionar dentro da lista do objeto.
 		categories.forEach(cat -> this.categories.add(new CategoryDTO(cat)));
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Instant getDate() {
+		return date;
+	}
+
+	public void setDate(Instant date) {
+		this.date = date;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	public List<CategoryDTO> getCategories() {
+		return categories;
 	}
 }
