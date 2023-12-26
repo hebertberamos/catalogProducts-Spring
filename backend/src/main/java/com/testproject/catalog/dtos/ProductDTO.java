@@ -32,6 +32,14 @@ public class ProductDTO implements Serializable{
 		this.description = description;
 		this.imgUrl = imgUrl;
 	}
+
+	public ProductDTO(String name, Double price, Instant date, String description, String imgUrl){
+		this.name = name;
+		this.price = price;
+		this.date = date;
+		this.description = description;
+		this.imgUrl = imgUrl;
+	}
 	
 	//Para instanciar um ProductDTO a partir de uma entidade Product
 	public ProductDTO(Product entity) {

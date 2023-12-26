@@ -85,12 +85,12 @@ public class ProductService {
 		}
 	}
 	
-	public void delete(Long id) {
+	public void deleteById(Long id) {
 		try {
 			repository.deleteById(id);
 		}
 		catch (EmptyResultDataAccessException e) {
-			throw new ResourcesNotFoundException("Id no found (" + id + ")");
+			throw new ResourcesNotFoundException("Id not found (" + id + ")");
 		}
 		catch(DataIntegrityViolationException e) {
 			throw new DatabaseException("This category can not be deleted. LINKED PRODUTCS");
