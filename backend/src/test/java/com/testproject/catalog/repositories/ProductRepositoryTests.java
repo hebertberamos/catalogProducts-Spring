@@ -1,6 +1,5 @@
 package com.testproject.catalog.repositories;
 
-import com.testproject.catalog.entities.Category;
 import com.testproject.catalog.entities.Product;
 import com.testproject.catalog.tests.ProductFactory;
 import org.junit.jupiter.api.Assertions;
@@ -10,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.Instant;
-import java.util.HashSet;
 import java.util.Optional;
 
+//Teste de Integração da classe ProductService e da classe ProductRepository
 @DataJpaTest
 public class ProductRepositoryTests {
 
@@ -37,14 +36,14 @@ public class ProductRepositoryTests {
     }
 
     //Ver o porque de a exceção não estar sen lançada quando o id do método deletById não existir dentro do banco de dados
-//    @Test
-//    public void deleteShouldThrowEmptyResultDataAccessExceptionWhenIdDoesNotExist(){
-//        Assertions.assertThrows(EmptyResultDataAccessException.class, () -> {
-//            repository.deleteById(unexcitingId);
-//        });
-//    }
+    /*@Test
+    public void deleteShouldThrowEmptyResultDataAccessExceptionWhenIdDoesNotExist(){
+        Assertions.assertThrows(EmptyResultDataAccessException.class, () -> {
+            repository.deleteById(unexcitingId);
+        });
+    }*/
 
-    //Testando para ver se oméodo save está adicionando um novo objeto quando o id é nulo
+    //Testando para ver se o método save está adicionando um novo objeto quando o id é nulo
     @Test
     public void saveShouldAddObjectWhenIdIsNull(){
         Product prod = ProductFactory.createNewProduct("TV 50' Phillips", 1000.0, Instant.now(), "qualquer coisinha aqui", "quialquer coisa aqui");
@@ -52,6 +51,23 @@ public class ProductRepositoryTests {
         repository.save(prod);
 
         Assertions.assertNotNull(prod.getId());
+    }
+
+    @Test
+    public void findByIdShouldReturnNotNullWhenIdExist(){
+        Product objProduct = ProductFactory.createNewProduct("TV 50' Phillips", 1000.0, Instant.now(), "qualquer coisinha aqui", "quialquer coisa aqui");
+
+        Product prod = repository.save(objProduct);
+        Optional<Product> optional = repository.findById(prod.getId());
+
+        Assertions.assertTrue(optional.isPresent());
+    }
+
+    @Test
+    public void findByIdShouldReturnNullOptionalWhenIdDontExist(){
+        Optional<Product> prod = repository.findById(70L);
+
+        Assertions.assertFalse(prod.isPresent());
     }
 
 }

@@ -7,6 +7,9 @@ import java.time.Instant;
 
 public class ProductFactory {
 
+    public static Product createNewProductNoAtributes(){
+        return new Product();
+    }
 
     public static Product createNewProduct(String name, Double price, Instant date, String description, String imgUrl){
         return new Product(name, price, date, description, imgUrl);
