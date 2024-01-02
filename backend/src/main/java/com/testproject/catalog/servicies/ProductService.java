@@ -32,11 +32,6 @@ public class ProductService {
 		Page<Product> list = repository.findAll(pageable);
 		return list.map(x -> new ProductDTO(x));
 	}
-	@Transactional
-	public List<ProductDTO> findAll(){
-		List<Product> list= repository.findAll();
-		return list.stream().map(prod -> new ProductDTO(prod)).collect(Collectors.toList());
-	}
 	
 	@Transactional
 	public ProductDTO findById(Long id) {

@@ -46,7 +46,7 @@ public class ProductRepositoryTests {
     //Testando para ver se o método save está adicionando um novo objeto quando o id é nulo
     @Test
     public void saveShouldAddObjectWhenIdIsNull(){
-        Product prod = ProductFactory.createNewProduct("TV 50' Phillips", 1000.0, Instant.now(), "qualquer coisinha aqui", "quialquer coisa aqui");
+        Product prod = ProductFactory.createNewProduct();
 
         repository.save(prod);
 
@@ -55,7 +55,7 @@ public class ProductRepositoryTests {
 
     @Test
     public void findByIdShouldReturnNotNullWhenIdExist(){
-        Product objProduct = ProductFactory.createNewProduct("TV 50' Phillips", 1000.0, Instant.now(), "qualquer coisinha aqui", "quialquer coisa aqui");
+        Product objProduct = ProductFactory.createNewProduct();
 
         Product prod = repository.save(objProduct);
         Optional<Product> optional = repository.findById(prod.getId());

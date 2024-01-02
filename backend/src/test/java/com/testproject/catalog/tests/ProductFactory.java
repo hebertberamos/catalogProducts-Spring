@@ -1,22 +1,22 @@
 package com.testproject.catalog.tests;
 
 import com.testproject.catalog.dtos.ProductDTO;
+import com.testproject.catalog.entities.Category;
 import com.testproject.catalog.entities.Product;
 
 import java.time.Instant;
 
 public class ProductFactory {
 
-    public static Product createNewProductNoAtributes(){
-        return new Product();
+    public static Product createNewProduct() {
+        Product prod = new Product(1L, "Phone", 800.0, Instant.now(), "qualquer coisa já que é string", "qualquer coisa aqui tb, já que vai aceitar qualquer coisa pq é uma string");
+        prod.getCategories().add(new Category(2L, "Electronics"));
+
+        return prod;
     }
 
-    public static Product createNewProduct(String name, Double price, Instant date, String description, String imgUrl){
-        return new Product(name, price, date, description, imgUrl);
+    public static ProductDTO createNewProductDto() {
+        Product prod = createNewProduct();
+        return new ProductDTO(prod, prod.getCategories());
     }
-
-    public static ProductDTO createNewProductDTO(String name, Double price, Instant date, String description, String imgUrl){
-        return new ProductDTO(name, price, date, description, imgUrl);
-    }
-
 }

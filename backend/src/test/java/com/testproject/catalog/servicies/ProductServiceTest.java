@@ -20,7 +20,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +43,7 @@ public class ProductServiceTest {
         existingId = 1L;
         nonExistingId = 1000L;
         dependentId = 4L;
-        product = ProductFactory.createNewProductNoAtributes();
+        product = ProductFactory.createNewProduct();
         page = new PageImpl<>(List.of(product));
 
 
