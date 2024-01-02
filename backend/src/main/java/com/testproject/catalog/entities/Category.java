@@ -1,16 +1,11 @@
 package com.testproject.catalog.entities;
 
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tb_category")
@@ -19,16 +14,16 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	private String name;
-	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant createdAt;
-	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant updatedAt;
-	
-	
+
+	@ManyToMany(mappedBy = "categories")
+	private Set<Product> products = new HashSet<>();
+
+
 	public Category() {
 	}
 
@@ -63,7 +58,11 @@ public class Category {
 	public Instant getUpdatedAt() {
 		return updatedAt;
 	}
-	
+
+	public Set<Product> getProducts() {
+		return products;
+	}
+
 	@PrePersist
 	public void prePersist() {
 		createdAt = Instant.now();
@@ -91,7 +90,6 @@ public class Category {
 		return Objects.equals(id, other.id) && Objects.equals(name, other.name);
 	}
 
-	
 	@Override
 	public String toString() {
 		return "Category [id=" + id + ", name=" + name + "]";
