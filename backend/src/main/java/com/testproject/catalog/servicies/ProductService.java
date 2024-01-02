@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.testproject.catalog.dtos.ProductDTO;
@@ -24,12 +26,11 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository repository;
-	
-	
+
 	@Transactional
-	public List<ProductDTO> findAll(){
-		List<Product> list= repository.findAll();
-		return list.stream().map(prod -> new ProductDTO(prod)).collect(Collectors.toList());
+	public Page<ProductDTO> findAllPaged(Pageable pageable) {
+		Page<Product> list = repository.findAll(pageable);
+		return list.map(x -> new ProductDTO(x));
 	}
 	
 	@Transactional
@@ -79,12 +80,12 @@ public class ProductService {
 		}
 	}
 	
-	public void delete(Long id) {
+	public void deleteById(Long id) {
 		try {
 			repository.deleteById(id);
 		}
 		catch (EmptyResultDataAccessException e) {
-			throw new ResourcesNotFoundException("Id no found (" + id + ")");
+			throw new ResourcesNotFoundException("Id not found (" + id + ")");
 		}
 		catch(DataIntegrityViolationException e) {
 			throw new DatabaseException("This category can not be deleted. LINKED PRODUTCS");
