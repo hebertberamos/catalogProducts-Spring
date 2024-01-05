@@ -8,13 +8,21 @@ import java.util.Set;
 
 import com.testproject.catalog.entities.Category;
 import com.testproject.catalog.entities.Product;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 
 public class ProductDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+	@Size(min = 5, max = 60, message = "O nome do produto deve ter no mínimo 5 caracteres e no máximo 60")
+	@NotBlank(message = "Campo requerido")
 	private String name;
+	@Positive(message = "O preço deve ser um valor positivo")
 	private Double price;
+	@PastOrPresent(message = "A data não pode ser uma data futura")
 	private Instant date;
 	private String description;
 	private String imgUrl;
