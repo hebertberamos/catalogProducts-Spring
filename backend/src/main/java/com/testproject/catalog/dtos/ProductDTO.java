@@ -1,5 +1,6 @@
 package com.testproject.catalog.dtos;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 
 public class ProductDTO implements Serializable{
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -29,8 +31,7 @@ public class ProductDTO implements Serializable{
 	
 	private List<CategoryDTO> categories = new ArrayList<>();
 	
-	public ProductDTO() {
-	}
+	public ProductDTO() {}
 
 	public ProductDTO(Long id, String name, Double price, Instant date, String description, String imgUrl) {
 		this.id = id;

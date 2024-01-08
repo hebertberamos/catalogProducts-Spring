@@ -1,6 +1,8 @@
 package com.testproject.catalog.dtos;
 
 import com.testproject.catalog.entities.User;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -9,10 +11,11 @@ import java.util.Set;
 public class UserDTO implements Serializable {
 
     private Long id;
+    @NotBlank(message = "Campo obrigatório")
     private String firstName;
     private String lastName;
+    @Email(message = "Por favor, entrar com um Email válido")
     private String email;
-    private String password;
 
     private Set<RoleDTO> roles = new HashSet<>();
 
