@@ -3,6 +3,7 @@ package com.testproject.catalog.servicies;
 import com.testproject.catalog.config.AppConfig;
 import com.testproject.catalog.dtos.UserDTO;
 import com.testproject.catalog.dtos.UserInsertDTO;
+import com.testproject.catalog.dtos.UserUpdateDTO;
 import com.testproject.catalog.entities.Role;
 import com.testproject.catalog.entities.User;
 import com.testproject.catalog.repositories.UserRepository;
@@ -60,7 +61,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO update(Long id, UserDTO dto) {
+    public UserDTO update(Long id, UserUpdateDTO dto) {
         try {
             User user = repository.findById(id).get();
 
