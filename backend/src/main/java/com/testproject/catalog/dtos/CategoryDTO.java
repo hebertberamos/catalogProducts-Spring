@@ -18,7 +18,6 @@ public class CategoryDTO implements Serializable{
 		this.name = name;
 	}
 
-	//Para que eu possa povoar o DTO simplimente passando uma entidade do tipo Category como argumento 
 	public CategoryDTO(Category entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();

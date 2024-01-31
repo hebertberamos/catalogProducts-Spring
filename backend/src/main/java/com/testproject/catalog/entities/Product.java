@@ -34,8 +34,7 @@ public class Product implements Serializable{
 	@Column(columnDefinition = "TEXT")
 	private String description;
 	private String imgUrl;
-	
-	//O produto pode ter mais de uma categoria
+
 	@ManyToMany
 	@JoinTable(
 			name = "tb_product_category",

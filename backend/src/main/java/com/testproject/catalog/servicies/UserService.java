@@ -1,10 +1,7 @@
 package com.testproject.catalog.servicies;
 
-import com.testproject.catalog.config.AppConfig;
 import com.testproject.catalog.dtos.UserDTO;
-import com.testproject.catalog.dtos.UserInsertDTO;
 import com.testproject.catalog.dtos.UserUpdateDTO;
-import com.testproject.catalog.entities.Role;
 import com.testproject.catalog.entities.User;
 import com.testproject.catalog.repositories.UserRepository;
 import com.testproject.catalog.servicies.exceptions.DatabaseException;
@@ -16,17 +13,12 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 public class UserService {
-
-
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
     @Autowired
     private UserRepository repository;
 
@@ -46,21 +38,6 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO insert(UserInsertDTO dto) {
-        User user = new User();
-        user.setFirstName(dto.getFirstName());
-        user.setLastName(dto.getLastName());
-        user.setEmail(dto.getEmail());
-        user.setPassword(passwordEncoder.encode(dto.getPassword()));
-        for(Role role : user.getRoles()) {
-            user.getRoles().add(role);
-        }
-
-        user = repository.save(user);
-        return new UserDTO(user);
-    }
-
-    @Transactional
     public UserDTO update(Long id, UserUpdateDTO dto) {
         try {
             User user = repository.findById(id).get();
@@ -68,9 +45,7 @@ public class UserService {
             user.setFirstName(dto.getFirstName());
             user.setLastName(dto.getLastName());
             user.setEmail(dto.getEmail());
-            for(Role role : user.getRoles()) {
-                user.getRoles().add(role);
-            }
+            user.setRole(dto.getRole());
 
             user = repository.save(user);
             return new UserDTO(user);

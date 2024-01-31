@@ -49,8 +49,7 @@ public class ProductDTO implements Serializable{
 		this.description = description;
 		this.imgUrl = imgUrl;
 	}
-	
-	//Para instanciar um ProductDTO a partir de uma entidade Product
+
 	public ProductDTO(Product entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();
@@ -59,11 +58,9 @@ public class ProductDTO implements Serializable{
 		this.description = entity.getDescription();
 		this.imgUrl = entity.getImgUrl();
 	}
-	
-	//Para instanciar um ProductDTO passando também as categorias que ele tem.
+
 	public ProductDTO(Product entity, Set<Category> categories) {
 		this(entity);
-		//adicionando as entidades que foram passadas pela listo do parâmetro e adicionar dentro da lista do objeto.
 		categories.forEach(cat -> this.categories.add(new CategoryDTO(cat)));
 	}
 

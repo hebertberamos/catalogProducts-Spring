@@ -48,7 +48,7 @@ public class ResourceExceptionHandler {
 		err.setError("Validation Exception");
 		err.setPath(request.getRequestURI());
 
-		//Alimentando a lista de erros do ValidationError com os erros de validação que forem capturados quando a exceção MethodArgumentNotValidException estourar
+		//Feeding the ValidationError error list with the validation errors that are caught when the MethodArgumentNotValidException exception overflows
 		for(FieldError fieldError : e.getBindingResult().getFieldErrors()){
 			err.addNewError(fieldError.getField(), fieldError.getDefaultMessage());
 		}

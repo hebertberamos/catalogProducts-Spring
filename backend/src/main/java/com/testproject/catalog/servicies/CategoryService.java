@@ -50,7 +50,6 @@ public class CategoryService {
 	public CategoryDTO insert(CategoryDTO dto) {
 		Category cat = new Category();
 		cat.setName(dto.getName());
-		//para salvar a nova informação dentro do banco de dados
 		cat = repository.save(cat);
 		
 		return new CategoryDTO(cat);
@@ -61,7 +60,6 @@ public class CategoryService {
 		try { 
 			Category entity = repository.findById(id).get();
 			entity.setName(dto.getName());
-			//para salvar a nova informação dentro do banco de dados
 			entity = repository.save(entity);
 			return new CategoryDTO(entity);
 		}

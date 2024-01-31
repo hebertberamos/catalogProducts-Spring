@@ -1,46 +1,23 @@
 package com.testproject.catalog.dtos;
 
-import com.testproject.catalog.entities.User;
 import com.testproject.catalog.entities.enums.UserRole;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 
-import java.io.Serializable;
+public class RegisterUserDTO {
 
-public class UserDTO implements Serializable {
-
-    private Long id;
-    @NotBlank(message = "Campo obrigatório")
     private String firstName;
     private String lastName;
-    @Email(message = "Por favor, entrar com um Email válido")
     private String email;
+    private String password;
     private UserRole role;
 
-    public UserDTO(){}
+    public RegisterUserDTO(){}
 
-    public UserDTO(Long id, String firstName, String lastName, String email, UserRole role) {
-        this.id = id;
+    public RegisterUserDTO(String firstName, String lastName, String email, String password, UserRole role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
         this.role = role;
-    }
-
-    public UserDTO(User entity) {
-        id = entity.getId();
-        firstName = entity.getFirstName();
-        lastName = entity.getLastName();
-        email = entity.getEmail();
-        role = entity.getRole();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -65,6 +42,14 @@ public class UserDTO implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public UserRole getRole() {
