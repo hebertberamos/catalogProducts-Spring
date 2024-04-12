@@ -2,6 +2,7 @@ package com.testproject.catalog.servicies;
 
 import java.util.Optional;
 
+import com.testproject.catalog.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -25,9 +26,14 @@ public class ProductService {
 	@Autowired
 	private ProductRepository repository;
 
+	@Autowired
+	private CategoryRepository categoryRepository;
+
 	@Transactional
-	public Page<ProductDTO> findAllPaged(Pageable pageable) {
-		Page<Product> list = repository.findAll(pageable);
+	public Page<ProductDTO> findAllPaged(Long categoryId, Pageable pageable) {
+		//Category category = (categoryId == 0) ? null : categoryRepository.getOne(categoryId); // Crating an object in memory to don't touch in database by the categoryId. But if the id is 0 will return null.
+
+		Page<Product> list = repository.findProducts(categoryId, pageable);
 		return list.map(x -> new ProductDTO(x));
 	}
 	

@@ -58,7 +58,7 @@ public class ProductResourcesTest {
         when(service.findById(nonExistingId)).thenThrow(ResourcesNotFoundException.class);
 
         //Simulação do método findAllPaged
-        when(service.findAllPaged(any())).thenReturn(page);
+        when(service.findAllPaged(nonExistingId, any())).thenReturn(page);
 
         //Simulação do update quando o id existe
         when(service.update(eq(existingId), any())).thenReturn(dto);

@@ -33,14 +33,14 @@ public class SecurityConfig {
         return http.csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        /*.requestMatchers(HttpMethod.POST, "/categories").hasRole("ADMIN")   // Only user who have the Role ADMIN can create a new category
+                        .requestMatchers(HttpMethod.POST, "/categories").hasRole("ADMIN")   // Only user who have the Role ADMIN can create a new category
                         .requestMatchers(HttpMethod.POST, "/products").hasRole("ADMIN")     // Only user who have the Role ADMIN can create a new products
                         .requestMatchers(HttpMethod.DELETE, "/users").hasRole("ADMIN")      // Only user who have the Role ADMIN can delete a user
                         .requestMatchers(HttpMethod.DELETE, "/products").hasRole("ADMIN")   // Only user who have the Role ADMIN can delete a product
                         .requestMatchers(HttpMethod.DELETE, "/categories").hasRole("ADMIN") // Only user who have the Role ADMIN can delete a category
                         .requestMatchers(HttpMethod.GET, "/users").hasRole("EMPLOYEE")      // Only user who have the Role EMPLOYEE can get users
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()     // All users have the right to register on the website
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()        // All user have the right to login on the website.*/
+                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()        // All user have the right to login on the website.
                         .anyRequest().permitAll())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

@@ -103,7 +103,8 @@ public class ProductServiceTest {
     @Test
     public void saveShouldReturnPageWithElementsInsideHimWhenExistElements(){
         Pageable pageable = PageRequest.of(0, 10);
-        Page<ProductDTO> result = service.findAllPaged(pageable);
+        Long categoryId = 1L;
+        Page<ProductDTO> result = service.findAllPaged(categoryId, pageable);
 
         Assertions.assertNotNull(result);
 

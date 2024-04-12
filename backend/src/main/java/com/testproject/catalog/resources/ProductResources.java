@@ -21,12 +21,15 @@ public class ProductResources {
 	private ProductService service;
 
 	@GetMapping
-	public ResponseEntity<Page<ProductDTO>> findAll(Pageable pageable) {
-		Page<ProductDTO> list = service.findAllPaged(pageable);
+	public ResponseEntity<Page<ProductDTO>> findAll(
+			@RequestParam(value = "categoryId",required = false, defaultValue = "0") Long categoryId,
+			Pageable pageable)
+	{
+		Page<ProductDTO> list = service.findAllPaged(categoryId, pageable);
 		return ResponseEntity.ok().body(list);
 	}
 
-	@GetMapping(value = "/{id}") 
+	@GetMapping(value = "/{id}")
 	public ResponseEntity<ProductDTO> findById(@PathVariable Long id){ 
 		ProductDTO prod = service.findById(id);
 		return ResponseEntity.ok().body(prod);
