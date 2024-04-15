@@ -1,5 +1,8 @@
 package com.testproject.catalog.servicies;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import com.testproject.catalog.repositories.CategoryRepository;
@@ -30,10 +33,9 @@ public class ProductService {
 	private CategoryRepository categoryRepository;
 
 	@Transactional
-	public Page<ProductDTO> findAllPaged(Long categoryId, Pageable pageable) {
-		//Category category = (categoryId == 0) ? null : categoryRepository.getOne(categoryId); // Crating an object in memory to don't touch in database by the categoryId. But if the id is 0 will return null.
-
-		Page<Product> list = repository.findProducts(categoryId, pageable);
+	public Page<ProductDTO> findAllPaged(Long categoryId, String name, Pageable pageable) {
+		List<Long> categoriesId = (categoryId == 0) ? null : Arrays.asList(categoryId);
+		Page<Product> list = repository.findProducts(categoriesId, name, pageable);
 		return list.map(x -> new ProductDTO(x));
 	}
 	

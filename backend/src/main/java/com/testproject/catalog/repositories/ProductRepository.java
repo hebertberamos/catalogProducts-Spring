@@ -8,13 +8,17 @@ import org.springframework.stereotype.Repository;
 
 import com.testproject.catalog.entities.Product;
 
+import java.util.List;
+
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long>{
 
     @Query("SELECT DISTINCT p " +
             "FROM Product p " +
             "INNER JOIN p.categories c " +
-            "WHERE c.id = :categoryId OR :categoryId = 0 ORDER BY p.id ")
-    Page<Product> findProducts(Long categoryId, Pageable pageable);
+            "WHERE (c.id IN :categoriesId OR :categoriesId IS NULL) " +
+            "AND (LOWER(p.name) LIKE LOWER(CONCAT ('%',:name,'%')) OR p.name = '') " +
+            "ORDER BY p.id")
+    Page<Product> findProducts(List<Long> categoriesId, String name, Pageable pageable);
 
 }
